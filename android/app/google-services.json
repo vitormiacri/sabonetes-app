@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "157487026558",
+    "project_id": "sabonetes-5e51c",
+    "storage_bucket": "sabonetes-5e51c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157487026558:android:01cf89a51bbdad3474232f",
+        "android_client_info": {
+          "package_name": "com.sabonetesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157487026558-esdlobgdm4uo8l6q19cm73pgpvelai43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIx2KjyNxFUW_kbnifyr7uVNQax2VoS5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157487026558-esdlobgdm4uo8l6q19cm73pgpvelai43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
