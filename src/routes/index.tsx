@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { About } from '../pages';
 import { HomeRoutes } from './home-stack';
@@ -9,7 +9,9 @@ const Main = createBottomTabNavigator();
 
 export const MainRoutes: React.FC = () => (
   <Main.Navigator
+    initialRouteName="Home"
     tabBarOptions={{
+      keyboardHidesTabBar: true,
       activeTintColor: '#FF92B9',
       inactiveTintColor: '#C4C4C4',
       tabStyle: {
@@ -22,25 +24,21 @@ export const MainRoutes: React.FC = () => (
       component={HomeRoutes}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons
-            name="home"
-            color={color}
-            size={size}
-          ></MaterialCommunityIcons>
+          <MaterialIcons name="home" color={color} size={size}></MaterialIcons>
         ),
       }}
     />
 
     <Main.Screen
-      name="Sobre"
+      name="Contato"
       component={About}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons
-            name="information"
+          <MaterialIcons
+            name="alternate-email"
             color={color}
             size={size}
-          ></MaterialCommunityIcons>
+          ></MaterialIcons>
         ),
       }}
     />

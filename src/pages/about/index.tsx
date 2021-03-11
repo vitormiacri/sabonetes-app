@@ -24,7 +24,7 @@ export const About: React.FC = () => {
   return (
     <>
       <Header>
-        <HeaderText>Sobre</HeaderText>
+        <HeaderText>Contato</HeaderText>
       </Header>
       <Container>
         <Image
