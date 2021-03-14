@@ -37,7 +37,7 @@ export const Details: React.FC<RouteParams> = () => {
           <ImageContainer>
             <ImageCover
               source={{ uri: product.photoUrl }}
-              resizeMode="cover"
+              resizeMode="contain"
             ></ImageCover>
           </ImageContainer>
           <TextContainer>

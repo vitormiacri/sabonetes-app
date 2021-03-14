@@ -14,13 +14,12 @@ export const CardList = styled.View`
 
 export const ImageContainer = styled.View`
   width: 100%;
+  height: 400px;
 `;
 
 export const ImageCover = styled.Image`
   width: 100%;
-  height: 250px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  height: 100%;
 `;
 
 export const TextContainer = styled.View`
@@ -28,6 +27,8 @@ export const TextContainer = styled.View`
   align-items: center;
   justify-content: center;
   padding: 15px;
+  border-top-width: 1px;
+  border-top-color: #c4c4c4;
 `;
 
 export const Title = styled.Text`
