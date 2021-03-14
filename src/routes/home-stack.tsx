@@ -13,6 +13,9 @@ export const HomeRoutes: React.FC = () => (
       component={Home}
       options={{
         title: 'Carina Sabonetes Artesanais',
+        headerTitleStyle: {
+          fontSize: 18,
+        },
         headerTitleAlign: 'center',
         headerTintColor: '#FFFFFF',
         headerStyle: {
