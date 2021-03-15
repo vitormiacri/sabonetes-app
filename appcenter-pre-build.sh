@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ${APPCENTER_SOURCE_DIRECTORY}
+
+echo "FB_AUTH_USERNAME=${FB_AUTH_USERNAME}" > .env
+echo "FB_AUTH_PASSWORD=${FB_AUTH_PASSWORD}" >> .env
