@@ -28,7 +28,6 @@ export const Home: React.FC = () => {
   const getProducts = useCallback(async () => {
     setLoading(true);
     if (!logged) {
-      console.log('não logado, logando...');
       await FirebaseAuth.login();
       setLogged(true);
     }
@@ -50,7 +49,7 @@ export const Home: React.FC = () => {
       if (text.length === 0) {
         setProductsList(products);
       } else {
-        const searchItem = productsList.filter(
+        const searchItem = products.filter(
           item => item.title.toLowerCase().indexOf(text.toLowerCase()) > -1,
         );
         setProductsList(searchItem);
@@ -94,9 +93,7 @@ export const Home: React.FC = () => {
       <FlatList
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
-          <Empty>
-            {loading ? 'Carregando lista...' : 'Nenhum sabonete encontrado'}
-          </Empty>
+          <Empty>{loading ? 'Aguarde...' : 'Nenhum sabonete encontrado'}</Empty>
         }
         ListHeaderComponent={<InputSearch handleSearch={handleSearch} />}
         data={productsList}
