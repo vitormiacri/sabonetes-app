@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
+import { RefreshControl, FlatList, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { RefreshControl } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { InputSearch } from '../../components/input-search';
