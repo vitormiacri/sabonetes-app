@@ -12,7 +12,7 @@ import {
   DescriptionContainer,
   Description,
 } from './styles';
-import { ProductProps } from 'src/services/firebase-cloud-firestore';
+import { ProductProps } from '../../services/firebase-cloud-firestore';
 
 type RouteParams = {
   product: ProductProps;

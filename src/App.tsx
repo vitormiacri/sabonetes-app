@@ -6,6 +6,7 @@ import SplashScreen from 'react-native-splash-screen';
 import OneSignal from 'react-native-onesignal';
 
 import { MainRoutes } from './routes';
+import AppProvider from './context';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -26,7 +27,9 @@ const App: React.FC = () => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="light-content" backgroundColor="#FF92B9" />
-      <MainRoutes />
+      <AppProvider>
+        <MainRoutes />
+      </AppProvider>
     </NavigationContainer>
   );
 };
