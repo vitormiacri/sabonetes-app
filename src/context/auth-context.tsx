@@ -1,18 +1,12 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FirebaseAuth } from '../services/firebase-auth';
-
-export type UserData = {
-  uid: string;
-  photoUrl: string;
-  name: string;
-  email: string;
-};
+import { UserData } from '../services/protocols/social-authentication';
+import GoogleAuth from '../services/firebase-google-auth';
 
 export interface AuthContextData {
   user: UserData;
   loading: boolean;
-  signInGoogle(): Promise<void>;
+  signInGoogle(): Promise<boolean>;
   signOutGoogle(): void;
 }
 
@@ -23,6 +17,7 @@ export const AuthContext = createContext<AuthContextData>(
 export const AuthProvider: React.FC = ({ children }) => {
   const [userState, setUserState] = useState<UserData>({} as UserData);
   const [loading, setLoading] = useState<boolean>(true);
+  const googleAuth = new GoogleAuth();
 
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
@@ -36,18 +31,22 @@ export const AuthProvider: React.FC = ({ children }) => {
     loadStorageData();
   });
 
-  const signInGoogle = useCallback(async (): Promise<void> => {
-    const user = await FirebaseAuth.loginWithGoogle();
+  const signInGoogle = useCallback(async (): Promise<boolean> => {
+    setLoading(true);
+    const user = await googleAuth.login();
     if (user) {
       await AsyncStorage.setItem('@sabonetes:user', JSON.stringify(user));
       setUserState(user);
+      setLoading(false);
+      return true;
     } else {
       console.error('Google Login: Usuário não logado');
+      return false;
     }
   }, []);
 
   const signOutGoogle = useCallback(async (): Promise<void> => {
-    await FirebaseAuth.logoutGoogle();
+    await googleAuth.logout();
     setUserState({} as UserData);
   }, []);
 
