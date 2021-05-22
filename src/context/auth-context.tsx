@@ -29,7 +29,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       setLoading(false);
     }
     loadStorageData();
-  });
+  }, []);
 
   const signInGoogle = useCallback(async (): Promise<boolean> => {
     setLoading(true);
