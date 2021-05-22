@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { InputSearch } from '../../components/input-search';
+import { SplashScreen } from '../../components/splash';
 import { FirebaseAuth } from '../../services/firebase-auth';
 import { FirebaseFirestore } from '../../services/firebase-cloud-firestore';
 
@@ -22,6 +23,7 @@ export const Home: React.FC = () => {
   const [products, setProducts] = useState([]);
   const [productsList, setProductsList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showSplash, setShowSplash] = useState(true);
   const [logged, setLogged] = useState(false);
 
   const getProducts = useCallback(async () => {
@@ -40,7 +42,9 @@ export const Home: React.FC = () => {
   }, [products, productsList, logged]);
 
   useEffect(() => {
+    const splashTimeout = setTimeout(() => setShowSplash(false), 1500);
     getProducts();
+    return () => clearTimeout(splashTimeout);
   }, []);
 
   const handleSearch = useCallback(
@@ -102,6 +106,7 @@ export const Home: React.FC = () => {
           <RefreshControl onRefresh={getProducts} refreshing={loading} />
         }
       ></FlatList>
+      <SplashScreen show={showSplash} />
     </Container>
   );
 };
