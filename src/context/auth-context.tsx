@@ -2,12 +2,15 @@ import React, { createContext, useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserData } from '../services/protocols/social-authentication';
 import GoogleAuth from '../services/firebase-google-auth';
+import FacebookAuth from '../services/firebase-facebook-auth';
 
 export interface AuthContextData {
   user: UserData;
   loading: boolean;
   signInGoogle(): Promise<boolean>;
   signOutGoogle(): void;
+  signInFacebook(): Promise<boolean>;
+  signOutFacebook(): void;
 }
 
 export const AuthContext = createContext<AuthContextData>(
@@ -18,6 +21,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [userState, setUserState] = useState<UserData>({} as UserData);
   const [loading, setLoading] = useState<boolean>(true);
   const googleAuth = new GoogleAuth();
+  const facebookAuth = new FacebookAuth();
 
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
@@ -50,9 +54,35 @@ export const AuthProvider: React.FC = ({ children }) => {
     setUserState({} as UserData);
   }, []);
 
+  const signInFacebook = useCallback(async (): Promise<boolean> => {
+    setLoading(true);
+    const user = await facebookAuth.login();
+    if (user) {
+      await AsyncStorage.setItem('@sabonetes:user', JSON.stringify(user));
+      setUserState(user);
+      setLoading(false);
+      return true;
+    } else {
+      console.error('Google Login: Usuário não logado');
+      return false;
+    }
+  }, []);
+
+  const signOutFacebook = useCallback(async (): Promise<void> => {
+    await facebookAuth.logout();
+    setUserState({} as UserData);
+  }, []);
+
   return (
     <AuthContext.Provider
-      value={{ user: userState, loading, signInGoogle, signOutGoogle }}
+      value={{
+        user: userState,
+        loading,
+        signInGoogle,
+        signOutGoogle,
+        signInFacebook,
+        signOutFacebook,
+      }}
     >
       {children}
     </AuthContext.Provider>
