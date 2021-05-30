@@ -1,17 +1,16 @@
 import React, { useCallback } from 'react';
 import { Modal } from 'react-native';
 import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
-import { useAuth } from '../../hooks/auth';
 import { useNavigation } from '@react-navigation/core';
 
+import { useAuth } from '../../hooks/auth';
 import { Container, Content, Text, Divider } from './styles';
 
 type Props = {
-  show?: boolean;
   setShow(value: boolean): void;
 };
 
-const LoginModal: React.FC<Props> = ({ show, setShow }) => {
+const LoginModal: React.FC<Props> = ({ setShow }) => {
   const { loading, signInGoogle } = useAuth();
   const navigation = useNavigation();
 
