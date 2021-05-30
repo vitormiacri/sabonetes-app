@@ -4,6 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { About } from '../pages';
 import { HomeRoutes } from './home-stack';
+import { FavoriteRoutes } from './favorite-stack';
 
 const Main = createBottomTabNavigator();
 
@@ -25,6 +26,20 @@ export const MainRoutes: React.FC = () => (
       options={{
         tabBarIcon: ({ color, size }) => (
           <MaterialIcons name="home" color={color} size={size}></MaterialIcons>
+        ),
+      }}
+    />
+
+    <Main.Screen
+      name="Favoritos"
+      component={FavoriteRoutes}
+      options={{
+        tabBarIcon: ({ color, size }) => (
+          <MaterialIcons
+            name="favorite"
+            color={color}
+            size={size}
+          ></MaterialIcons>
         ),
       }}
     />
