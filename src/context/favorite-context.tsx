@@ -28,10 +28,12 @@ export const FavoriteProvider: React.FC = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const getFavorites = useCallback(async (userId: string): Promise<void> => {
-    setLoading(true);
-    const products = await FirebaseFirestore.getFavorites(userId);
-    setFavorites(products);
-    setLoading(false);
+    if (userId) {
+      setLoading(true);
+      const products = await FirebaseFirestore.getFavorites(userId);
+      setFavorites(products);
+      setLoading(false);
+    }
   }, []);
 
   const setFavorite = useCallback(

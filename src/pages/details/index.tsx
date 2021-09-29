@@ -4,6 +4,8 @@ import {
   TouchableHighlight,
   View,
   ActivityIndicator,
+  Alert,
+  ToastAndroid,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/core';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -37,13 +39,29 @@ export const Details: React.FC<RouteParams> = () => {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   const handleSaveFavorite = useCallback(async () => {
-    await setFavorite(user.uid, product.id);
-    setIsFavorite(true);
+    if (user.uid) {
+      await setFavorite(user.uid, product.id);
+      ToastAndroid.show('Adicionado aos favoritos', ToastAndroid.SHORT);
+      setIsFavorite(true);
+    } else {
+      Alert.alert(
+        'Ops...',
+        'Faça o login para salvar este sabonete como favorito.',
+      );
+    }
   }, [user.uid]);
 
   const handleRemoveFavorite = useCallback(async () => {
-    await removeFavorite(user.uid, product.id);
-    setIsFavorite(false);
+    if (user.uid) {
+      await removeFavorite(user.uid, product.id);
+      ToastAndroid.show('Removido dos favoritos', ToastAndroid.SHORT);
+      setIsFavorite(false);
+    } else {
+      Alert.alert(
+        'Ops...',
+        'Faça o login para remover este sabonete dos favoritos.',
+      );
+    }
   }, [user.uid]);
 
   useEffect(() => {
